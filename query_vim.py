@@ -31,8 +31,16 @@ def query_vim_help(query: str, prompt: ChatPromptTemplate, k: int = 3):
 
     # Retrieve relevant documents
     relevant_docs = vector_store.similarity_search(query, k=k)
+    
+    # Write each document's content to a new file
+    for i, doc in enumerate(relevant_docs):
+        filename = f"out/doc_{i+1}.txt"
+        with open(filename, "w") as file:
+            file.write(doc.page_content)
+
     # Convert to langchain_core Document objects
     relevant_docs = [Document(page_content=doc.page_content, metadata=doc.metadata) for doc in relevant_docs]
+
 
     # Initialize the language model
     llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)

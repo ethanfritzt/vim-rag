@@ -1,3 +1,34 @@
+
+Example Output Files
+====================
+
+When a user prompts the system with a query like "how to quit vim", the `query_vim_help` function in `query_vim.py` generates example output files. These files, named `doc_1.txt`, `doc_2.txt`, and `doc_3.txt`, are created in the `out/` directory and contain relevant information retrieved from the Vim documentation.
+
+How the Documents are Created:
+------------------------------
+
+1. The function uses a vector store to perform a similarity search based on the user's query.
+2. It retrieves the top 3 most relevant documents (by default, as k=3).
+3. For each retrieved document:
+   - A new file is created in the `out/` directory.
+   - The file is named `doc_{i+1}.txt`, where i is the index of the document (0, 1, 2).
+   - The content of the retrieved document is written to this file.
+
+Content of the Example Files:
+-----------------------------
+
+1. doc_1.txt:
+   Contains information about commands for all windows in Vim, including how to quit Vim when multiple windows are open.
+
+2. doc_2.txt:
+   Includes various Vim-related information, such as uninstalling Vim on different systems and troubleshooting tips.
+
+3. doc_3.txt:
+   Provides detailed instructions on uninstalling Vim, including command-line instructions for Unix systems and GUI uninstallation for Windows.
+
+These files serve as a snapshot of the relevant information retrieved from the Vim documentation based on the user's query. They can be useful for debugging, verifying the retrieval process, or providing additional context to the user if needed.
+
+
 Building and Running the PostgreSQL with pgvector Docker Container
 ==================================================================
 
