@@ -29,6 +29,25 @@ vector_store = PGVector(
 # Function to query the database
 def query_vim_help(query: str, prompt: ChatPromptTemplate, k: int = 3):
 
+    """
+    Searches for relevant documents in a vector store based on a user query,
+    retrieves the content and metadata of the top-ranked documents, generates a
+    response using a large language model, and returns the answer to the query.
+
+    Args:
+        query (str): Used to perform a similarity search in the `vector_store`.
+            It is the input to be searched in the document database.
+        prompt (ChatPromptTemplate): Passed to the `create_stuff_documents_chain`
+            function, likely to generate a chain of documents for the language
+            model to process.
+        k (int): Used as the number of most similar documents to be retrieved by
+            the `vector_store.similarity_search` method. It is set to 3 by default,
+            but can be overridden when calling the function.
+
+    Returns:
+        str: The answer to the user's query.
+
+    """
     # Retrieve relevant documents
     relevant_docs = vector_store.similarity_search(query, k=k)
     
